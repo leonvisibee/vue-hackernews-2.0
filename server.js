@@ -117,6 +117,23 @@ function render(req, res) {
   })
 }
 
+
+let count = 0
+app.post('/increment', (req, res) => {
+  console.log('increment')
+  ++count
+  res.json({ count })
+})
+app.post('/decrement', (req, res) => {
+  console.log('decrement')
+  --count
+  res.json({ count })
+})
+app.get('/count', (req, res) => {
+  console.log('count')
+  res.json({ count })
+})
+
 app.get('*', isProd ? render : (req, res) => {
   readyPromise.then(() => render(req, res))
 })

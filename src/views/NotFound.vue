@@ -2,11 +2,9 @@
     <div>
         <h1>{{ title }}</h1>
         <p>{{ text }}</p>
-        <Counter />
     </div>
 </template>
 <script>
-import Counter from '../components/Counter.vue'
 
 export default {
     asyncData() {
@@ -25,6 +23,5 @@ export default {
             text: null
         };
     },
-    components: { Counter }
 }
 </script>

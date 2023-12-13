@@ -1,7 +1,12 @@
 <template>
     <div>
         <h1>{{ title }}</h1>
-        <p>{{ text }}</p>
+        <template v-if="$fetchState.pending">
+            loading...
+        </template>
+        <template v-else>
+            <p>{{ text }}</p>
+        </template>
         <Counter />
     </div>
 </template>
@@ -15,8 +20,10 @@ export default {
             title: `Home ${Math.random()}`
         }
     },
+    fetchOnServer: false,
+    fetchDelay: 1000,
     fetch() {
-        console.log('Home fetch')
+        console.log('Home fetch on client after 1000', document.title)
         this.text = `Home text at ${new Date()}`
     },
     data() {
