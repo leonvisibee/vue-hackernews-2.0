@@ -1,3 +1,4 @@
+import '@babel/polyfill'
 import Vue from 'vue'
 import App from './App.vue'
 import { createStore } from './store'
@@ -5,6 +6,7 @@ import { createRouter } from './router'
 import { sync } from 'vuex-router-sync'
 import titleMixin from './util/title'
 import * as filters from './util/filters'
+import refresh from './mixins/refresh'
 
 // mixin for handling title
 Vue.mixin(titleMixin)
@@ -16,10 +18,10 @@ Object.keys(filters).forEach(key => {
 
 // Expose a factory function that creates a fresh set of store, router,
 // app instances on each call (which is called for each SSR request)
-export function createApp () {
+export function createApp(ssrContext) {
   // create store and router instances
-  const store = createStore()
-  const router = createRouter()
+  const store = createStore(ssrContext)
+  const router = createRouter(ssrContext)
 
   // sync the router with the vuex store.
   // this registers `store.state.route`
@@ -31,6 +33,7 @@ export function createApp () {
   const app = new Vue({
     router,
     store,
+    mixins: [refresh],
     render: h => h(App)
   })
 

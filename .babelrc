@@ -1,8 +1,6 @@
 {
-  "presets": [
-    ["env", { "modules": false }]
-  ],
+  "presets": ["env", "stage-0"],
   "plugins": [
-    "syntax-dynamic-import"
+    "transform-optional-catch-binding"
   ]
 }
