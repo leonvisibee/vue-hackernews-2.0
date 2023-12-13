@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            layout: {{ layout }}, fetch: {{ fetch }}
+            layout: {{ layout }}, fetch: {{ result }}
         </div>
         <transition name="fade" mode="out-in">
             <router-view></router-view>
@@ -18,11 +18,13 @@ export default {
     },
     fetch() {
         console.log('Layout fetch')
-        this.fetch = 'fetched'
+        console.log(this.result)
+        this.result = 'fetched'
     },
     data() {
+        console.log('Layout data')
         return {
-            fetch: 'initial'
+            result: 'initial'
         }
     }
 }

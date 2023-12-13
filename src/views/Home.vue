@@ -8,7 +8,7 @@
         <template v-else>
             <p>{{ text }}</p>
         </template>
-        <Counter />
+        <Counter :key="Math.random()" />
     </div>
 </template>
 <script>
@@ -22,10 +22,10 @@ export default {
         }
     },
     fetchOnServer: false,
-    fetchDelay: 1000,
-    fetch() {
+    async fetch() {
         console.log('Home fetch on client after 1000', document.title)
         this.text = `Home text at ${new Date()}`
+        await new Promise(r => setTimeout(r, 10))
     },
     data() {
         return {
