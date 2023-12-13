@@ -46,7 +46,7 @@ module.exports = {
         }
       },
       {
-        test: /\.styl(us)?$/,
+        test: [/\.styl(us)?$/, /\.css$/],
         use: isProd
           ? ExtractTextPlugin.extract({
               use: [

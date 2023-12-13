@@ -1,6 +1,7 @@
 import '@babel/polyfill'
 import Vue from 'vue'
 import App from './App.vue'
+import './app.css'
 import { createStore } from './store'
 import { createRouter } from './router'
 import { sync } from 'vuex-router-sync'
