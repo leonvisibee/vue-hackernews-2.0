@@ -7,6 +7,7 @@ const compression = require('compression')
 // const microcache = require('route-cache')
 const resolve = (file) => path.resolve(__dirname, file)
 const { createBundleRenderer } = require('vue-server-renderer')
+const { createProxyMiddleware } = require('http-proxy-middleware')
 
 console.log('NODE_ENV', process.env.NODE_ENV ?? 'development')
 const isProd = process.env.NODE_ENV === 'production'
@@ -117,22 +118,15 @@ function render(req, res) {
   })
 }
 
-
-let count = 0
-app.post('/increment', (req, res) => {
-  console.log('increment')
-  ++count
-  res.json({ count })
-})
-app.post('/decrement', (req, res) => {
-  console.log('decrement')
-  --count
-  res.json({ count })
-})
-app.get('/count', (req, res) => {
-  console.log('count')
-  res.json({ count })
-})
+app.use(require('./counter.js'))
+app.use('/api/:path', createProxyMiddleware({
+  target: 'http://jsonplaceholder.typicode.com',
+  changeOrigin: true,
+  logLevel: 'debug',
+  pathRewrite: {
+    '^/api': ''
+  }
+}))
 
 app.get('*', isProd ? render : (req, res) => {
   readyPromise.then(() => render(req, res))

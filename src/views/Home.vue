@@ -1,5 +1,6 @@
 <template>
     <div>
+        <button class="outline px-4 rounded" @click="$fetch">$fetch (Home)</button>
         <h1>{{ title }}</h1>
         <template v-if="$fetchState.pending">
             loading...
@@ -14,7 +15,7 @@
 import Counter from '../components/Counter.vue';
 export default {
     components: { Counter },
-    aasyncData() {
+    asyncData() {
         console.log('Home asyncData')
         return {
             title: `Home ${Math.random()}`

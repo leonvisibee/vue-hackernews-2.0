@@ -7,6 +7,7 @@
         </router-link>
         <router-link class="[&.router-link-active]:underline p-2" to="/about">About</router-link>
         <router-link class="[&.router-link-active]:underline p-2" to="/404">Not Found</router-link>
+        <router-link class="[&.router-link-active]:underline p-2" to="/posts">Posts</router-link>
       </nav>
     </header>
     <transition name="fade" mode="out-in">
